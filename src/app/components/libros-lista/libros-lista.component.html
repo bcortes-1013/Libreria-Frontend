@@ -1,0 +1,73 @@
+<!-- ============================================================
+     📘 Semana 3 - Listado de Libros (GET todos)
+     ============================================================ -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-12 col-lg-10">
+      <div class="card shadow-lg border-0 rounded-4 libro-form">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+          <h4 class="mb-0">
+            📖 Listado
+          </h4>
+        </div>
+      <!-- <div class="libros-container container mt-5">
+      <h2 class="page-title text-center mb-4">Listado</h2> -->
+
+      <!-- Mensajes de estado -->
+      <div *ngIf="loading" class="alert alert-info text-center shadow-sm">
+        Cargando libros...
+      </div>
+      <div *ngIf="error" class="alert alert-danger text-center shadow-sm">
+        {{ error }}
+      </div>
+
+      <!-- Botón nuevo libro -->
+      <div class="d-flex justify-content-center mt-3 mb-3">
+        <a routerLink="/libros/nuevo" class="btn btn-main">
+          ➕ Nuevo Libro
+        </a>
+      </div>
+
+      <!-- Tabla de libros -->
+      <div class="table-wrapper shadow-sm" *ngIf="!loading && !error && libros.length > 0">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Género</th>
+              <th>Año</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let libro of libros">
+              <td>{{ libro.id }}</td>
+              <td>
+                <a [routerLink]="['/libros', libro.id]" class="titulo-link">
+                  {{ libro.titulo }}
+                </a>
+              </td>
+              <td>{{ libro.autor }}</td>
+              <td>{{ libro.genero }}</td>
+              <td>{{ libro.anioPublicacion }}</td>
+              <td class="text-center">
+                <div class="acciones">
+                  <a [routerLink]="['/libros/editar', libro.id]" class="btn btn-edit">✏️</a>
+                  <button (click)="eliminar(libro.id)" class="btn btn-delete">🗑️</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Sin libros -->
+      <div *ngIf="!loading && !error && libros.length === 0" class="alert alert-secondary text-center shadow-sm">
+        No hay libros registrados en la base de datos.
+      </div>
+    </div>
+  </div>
+</div>

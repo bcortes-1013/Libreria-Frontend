@@ -1,0 +1,137 @@
+<!-- ============================================================
+     Formulario de Libro (Crear / Editar)
+     ============================================================ -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-lg border-0 rounded-4 libro-form">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+          <h4 class="mb-0">
+            {{ editMode ? '✏️ Editar' : '➕ Nuevo' }}
+          </h4>
+        </div>
+
+        <div class="card-body p-4">
+          <div *ngIf="loading" class="alert alert-info text-center">
+            <div class="spinner-border spinner-border-sm me-2"></div>
+            Cargando libro...
+          </div>
+
+          <div *ngIf="error" class="alert alert-danger text-center">
+            ⚠️ {{ error }}
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!loading" novalidate>
+
+            <!-- ========================= TÍTULO ========================= -->
+            <div class="mb-3">
+              <label for="titulo" class="form-label fw-semibold">Título</label>
+              <input
+                id="titulo"
+                type="text"
+                formControlName="titulo"
+                class="form-control"
+                [ngClass]="{'is-invalid': hasError('titulo')}"
+                placeholder="Ej: Clean Code"
+              />
+              <div *ngIf="hasError('titulo')" class="invalid-feedback">
+                <ng-container *ngIf="hasError('titulo','required')">
+                  El título es obligatorio.
+                </ng-container>
+                <ng-container *ngIf="hasError('titulo','minlength')">
+                  Debe tener al menos 3 caracteres.
+                </ng-container>
+                <ng-container *ngIf="hasError('titulo','maxlength')">
+                  No puede superar los 100 caracteres.
+                </ng-container>
+              </div>
+            </div>
+
+            <!-- ========================= AUTOR ========================= -->
+            <div class="mb-3">
+              <label for="autor" class="form-label fw-semibold">Autor</label>
+              <input
+                id="autor"
+                type="text"
+                formControlName="autor"
+                class="form-control"
+                [ngClass]="{'is-invalid': hasError('autor')}"
+                placeholder="Ej: Gabriel García Márquez"
+              />
+              <div *ngIf="hasError('autor')" class="invalid-feedback">
+                <ng-container *ngIf="hasError('autor','required')">
+                  El autor es obligatorio.
+                </ng-container>
+                <ng-container *ngIf="hasError('autor','minlength')">
+                  Debe tener al menos 3 caracteres.
+                </ng-container>
+                <ng-container *ngIf="hasError('autor','maxlength')">
+                  No puede superar los 100 caracteres.
+                </ng-container>
+              </div>
+            </div>
+
+            <!-- ========================= GÉNERO ========================= -->
+            <div class="mb-3">
+              <label for="genero" class="form-label fw-semibold">Género</label>
+              <input
+                id="genero"
+                type="text"
+                formControlName="genero"
+                class="form-control"
+                [ngClass]="{'is-invalid': hasError('genero')}"
+                placeholder="Ej: Programación, Historia, Novela..."
+              />
+              <div *ngIf="hasError('genero')" class="invalid-feedback">
+                <ng-container *ngIf="hasError('genero','required')">
+                  El género es obligatorio.
+                </ng-container>
+                <ng-container *ngIf="hasError('genero','minlength')">
+                  Debe tener al menos 3 caracteres.
+                </ng-container>
+                <ng-container *ngIf="hasError('genero','maxlength')">
+                  No puede superar los 50 caracteres.
+                </ng-container>
+              </div>
+            </div>
+
+            <!-- ==================== AÑO DE PUBLICACIÓN ================== -->
+            <div class="mb-3">
+              <label for="anioPublicacion" class="form-label fw-semibold">Año de Publicación</label>
+              <input
+                id="anioPublicacion"
+                type="number"
+                formControlName="anioPublicacion"
+                class="form-control"
+                [ngClass]="{'is-invalid': hasError('anioPublicacion')}"
+                placeholder="Ej: 2008"
+              />
+              <div *ngIf="hasError('anioPublicacion')" class="invalid-feedback">
+                <ng-container *ngIf="hasError('anioPublicacion','required')">
+                  El año es obligatorio.
+                </ng-container>
+                <ng-container *ngIf="hasError('anioPublicacion','min')">
+                  Debe ser mayor o igual a 1900.
+                </ng-container>
+                <ng-container *ngIf="hasError('anioPublicacion','max')">
+                  No puede superar el 2100.
+                </ng-container>
+              </div>
+            </div>
+
+            <!-- ========================= BOTONES ======================== -->
+            <div class="d-flex justify-content-between mt-4">
+              <button type="submit" class="btn btn-success px-4" [disabled]="form.invalid">
+                {{ editMode ? 'Actualizar' : 'Crear' }}
+              </button>
+              <a routerLink="/libros" class="btn btn-outline-secondary px-4">
+                Volver
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

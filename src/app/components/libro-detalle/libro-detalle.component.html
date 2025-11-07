@@ -1,0 +1,53 @@
+<!-- ============================================================
+     Detalle de Libro - Diseño con Bootstrap
+     ============================================================ -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0 rounded-4 libro-detalle">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+          <h4 class="mb-0">📗 Detalle del Libro</h4>
+        </div>
+
+        <div class="card-body" *ngIf="!loading && !error && libro">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>ID:</strong> {{ libro.id }}
+            </li>
+            <li class="list-group-item">
+              <strong>Título:</strong> {{ libro.titulo }}
+            </li>
+            <li class="list-group-item">
+              <strong>Autor:</strong> {{ libro.autor }}
+            </li>
+            <li class="list-group-item">
+              <strong>Género:</strong> {{ libro.genero }}
+            </li>
+            <li class="list-group-item">
+              <strong>Año de Publicación:</strong> {{ libro.anioPublicacion }}
+            </li>
+          </ul>
+
+          <div class="d-flex justify-content-between mt-4">
+            <a [routerLink]="['/libros/editar', libro.id]" class="btn btn-warning me-2">
+              Editar
+            </a>
+            <a routerLink="/libros" class="btn btn-outline-secondary">
+              Volver
+            </a>
+          </div>
+        </div>
+
+        <div class="card-body text-center" *ngIf="loading">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="mt-2">Cargando libro...</p>
+        </div>
+
+        <div class="card-body text-center text-danger" *ngIf="error">
+          <p>⚠️ {{ error }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
