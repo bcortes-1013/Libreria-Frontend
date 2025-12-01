@@ -1,47 +1,76 @@
-// ======================================================================
-// Semana 3 - Configuración inicial de rutas (app.routes.ts)
-// ======================================================================
-//
-// Angular 17 usa arquitectura standalone, así que las rutas se definen
-// en este arreglo sin necesidad de NgModules.
-// se conectan en app.config.ts
-// con provideRouter(routes).
-//
-// Cada entrada indica:
-//   path: URL relativa (por ejemplo 'libros')
-//   component: componente standalone a mostrar
-//
-// El sistema SPA (Single Page Application) de Angular usará <router-outlet>
-// para cargar estos componentes dinámicamente.
-// Rutas definidas:
-//   /libros           → Listado (GET todos)
-//   /libros/nuevo     → Crear (POST)
-//   /libros/editar/:id→ Editar (PUT) usando el mismo form
-//   /libros/:id       → Detalle (GET por ID) para visibilidad del requisito
-//   '' → redirección inicial a /libros
-// ======================================================================
-
+import { LoginComponent } from './views/users/login/login.component';
 import { Routes } from '@angular/router';
-import { LibrosListaComponent } from './components/libros-lista/libros-lista.component'; // 👈 Importamos nuestro componente
+import { HomeComponent } from './views/home/home.component';
+import { RegisterComponent } from './views/users/register/register.component';
+import { ProfileComponent } from './views/users/profile/profile.component';
+import { RecoverComponent } from './views/users/recover/recover.component';
+import { AdminComponent } from './views/users/admin/admin.component';
+import { CreatebookComponent } from './views/books/create-book/create-book.component';
+import { ListbookComponent } from './views/books/list-book/list-book.component';
+import { EditbookComponent } from './views/books/edit-book/edit-book.component';
+import { CatalogBookComponent } from './views/books/catalog-book/catalog-book.component';
 
-import { LibroFormComponent } from './components/libro-form/libro-form.component';
-import { LibroDetalleComponent } from './components/libro-detalle/libro-detalle.component';
-
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
-    {
-        path: '', // Ruta raíz (http://localhost:4200)
-        redirectTo: 'libros', // Redirige automáticamente
-        pathMatch: 'full'
-    },
-    {
-        path: 'libros', // Ruta principal
-        component: LibrosListaComponent // El componente que se muestra
-    },
-    { path: 'libros/nuevo', component: LibroFormComponent },
-    { path: 'libros/editar/:id', component: LibroFormComponent },
-    { path: 'libros/:id', component: LibroDetalleComponent },   // GET por ID visible
-    { path: '**', redirectTo: 'libros' }
+  { path: '', component: HomeComponent  },
+  {
+    path: 'home',
+    redirectTo: '',
+    pathMatch: 'full'
+  },
 
+  // ============================================================
+  // LIBROS - CATÁLOGO PÚBLICO
+  // ============================================================
+  { path: 'books-list', component: CatalogBookComponent },
 
+  // ============================================================
+  // RUTAS DE AUTENTICACIÓN
+  // ============================================================
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'recover', component: RecoverComponent },
+
+  // ============================================================
+  // PERFIL DEL USUARIO (Edición)
+  // ============================================================
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]      // requiere sesión activa
+  },
+
+  // ============================================================
+  // LISTA DE USUARIOS (Solo ADMIN)
+  // ============================================================
+  {
+    path: 'users',
+    component: AdminComponent,
+    canActivate: [AdminGuard]     // requiere ser ADMIN
+  },
+
+  // ============================================================
+  // CRUD LIBROS (Solo ADMIN)
+  // ============================================================
+  {
+    path: 'books',
+    component: ListbookComponent,
+    canActivate: [AdminGuard]      // ambos roles pueden ver libros
+  },
+
+  {
+    path: 'books/create',
+    component: CreatebookComponent,
+    canActivate: [AdminGuard]     // solo ADMIN puede crear
+  },
+
+  {
+    path: 'books/edit/:id',
+    component: EditbookComponent,
+    canActivate: [AdminGuard]     // solo ADMIN puede editar
+  },
+
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

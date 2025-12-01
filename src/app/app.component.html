@@ -1,26 +1,11 @@
-<!-- =============================================================
-     📘 Semana 3 - Estructura principal del Frontend Angular
-     ============================================================= -->
+<app-navbar></app-navbar>
 
-<div class="app-container">
-  <!-- Encabezado -->
-  <header class="app-header shadow-sm">
-    <h1>📚 Biblioteca</h1>
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
 
-    <!-- Barra de navegación -->
-    <!-- <nav class="nav-links">
-      <a routerLink="/libros" routerLinkActive="active-link">📖 Lista</a>
-      <a routerLink="/libros/nuevo" routerLinkActive="active-link">➕ Nuevo</a>
-    </nav> -->
-  </header>
+<app-footer></app-footer>
 
-  <!-- Contenido dinámico -->
-  <main class="app-content">
-    <router-outlet></router-outlet>
-  </main>
-
-  <!-- Pie de página -->
-  <footer class="app-footer">
-    <p>Desarrollado en Angular + Spring Boot</p>
-  </footer>
+<div class="overlay-loading" *ngIf="loading$ | async">
+  <div class="spinner-border text-light" style="width: 4rem; height: 4rem"></div>
 </div>

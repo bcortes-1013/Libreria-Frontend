@@ -1,0 +1,64 @@
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Registro de Libro</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="bg-2 animate-slideUp">
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Título</label>
+                <input id="title" type="text" formControlName="title" class="form-control" placeholder="Cien años de soledad">
+                <div class="text-error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+                    Título obligatorio
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="author" class="form-label">Autor</label>
+                <input id="author" type="text" formControlName="author" class="form-control" placeholder="Gabriel García Márquez">
+                <div class="text-error" *ngIf="form.get('author')?.touched && form.get('author')?.invalid">
+                    Autor obligatorio
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="genre" class="form-label">Género</label>
+                <input id="genre" type="text" formControlName="genre" class="form-control" placeholder="Novela, poesía, teatro">
+                <div class="text-error" *ngIf="form.get('genre')?.touched && form.get('genre')?.invalid">
+                    Género obligatorio
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="publication" class="form-label">Publicación</label>
+                <input id="publication" type="number" formControlName="publication" class="form-control" placeholder="1967">
+                <div class="text-error" *ngIf="form.get('publication')?.touched && form.get('publication')?.invalid">
+                    Año inválido (Rango: 1000 - {{ currentYear }})
+                </div>
+            </div>
+
+            <div *ngIf="mensajeError" class="alert alert-danger mt-3 text-center">
+                {{ mensajeError }}
+            </div>
+
+            <div *ngIf="mensajeOk" class="alert alert-success mt-3 text-center">
+                {{ mensajeOk }}
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-1">Registrar</button>
+                <button type="reset" class="btn btn-3">Limpiar</button>
+            </div>
+
+            <div class="text-center mt-3">
+                <a routerLink="/books" class="btn-outline">Volver a Gestión de Libros</a>
+            </div>
+        </form>
+    </div>
+    <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+        <div id="toastRegistro" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</main>

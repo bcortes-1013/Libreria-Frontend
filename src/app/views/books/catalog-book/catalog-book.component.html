@@ -1,0 +1,24 @@
+<main>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Catálogo de libros</h1>
+    <div class="row">
+      <div class="col col-sm-12 col-lg-4 mb-4" *ngFor="let book of books">
+        <div class="card">
+
+          <div class="card-header bg-5">
+            <div class="d-flex justify-content-center">
+              <img src="assets/img/book-generic.png" class="card-book-img" alt="Portada del libro">
+            </div>
+            <h2 class="card-book-title">{{ book.title }}</h2>
+          </div>
+
+          <div class="card-body bg-4">
+            <p class="card-book-detail"><strong>Autor:</strong> {{ book.author }}</p>
+            <p class="card-book-detail"><strong>Género:</strong> {{ book.genre }}</p>
+            <p class="card-book-detail"><strong>Año:</strong> {{ book.publication }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

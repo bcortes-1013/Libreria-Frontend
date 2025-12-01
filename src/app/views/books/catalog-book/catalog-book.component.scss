@@ -1,0 +1,37 @@
+.btn-1 {background-color: var(--color-1); color: var(--color-5);}
+.btn-2 {background-color: var(--color-2); color: var(--color-6);}
+.btn-3 {background-color: var(--color-5); color: var(--color-1);}
+
+.bg-1 {background-color: var(--color-1); color: var(--color-5);}
+.bg-2 {background-color: var(--color-2); color: var(--color-3);}
+.bg-3 {background-color: var(--color-3);}
+.bg-4 {background-color: var(--color-4); color: var(--color-6);}
+.bg-5 {background-color: var(--color-5);}
+.bg-6 {background-color: var(--color-6);}
+
+.btn-recuperar-password{
+  text-decoration: none;
+  color: var(--color-5);
+}
+
+.card-book-title{
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  text-align: center;
+  height: 2.5rem;
+}
+
+.card-book-img{
+  height: 150px;
+  object-fit: cover;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.card-book-detail{
+  font-size: 1rem;
+  margin-top: 5px;
+  color: var(--color-1);;
+  margin-bottom: 0;
+}

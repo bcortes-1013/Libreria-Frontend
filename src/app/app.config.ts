@@ -1,15 +1,11 @@
 // =========================================================
-// Semana 3 – Configuración base de Angular
+// Configuración base de Angular
 // =========================================================
 //
 // Este archivo reemplaza al antiguo app.module.ts.
 // Aquí registramos los servicios globales que usará
 // toda la aplicación.
 //
-// Objetivos de la Semana 3:
-// 1️⃣ Activar el sistema de rutas (SPA).
-// 2️⃣ Habilitar el HttpClient para conectarnos
-//     con el microservicio Spring Boot.
 // =========================================================
 
 import { ApplicationConfig } from '@angular/core';
