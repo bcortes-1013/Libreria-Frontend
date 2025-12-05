@@ -67,12 +67,13 @@ export class LoginComponent {
       error: err => {
         this.cargando = false;
         console.error('Error en login', err);
+
         if (err.status === 0) {
           this.mensajeError = 'Error en la conexión, intenta más tarde';
-          return;
         } else {
           this.mensajeError = err.error?.error || 'Error en el servidor';
         }
+
         this.loadingService.hide();
       }
     });

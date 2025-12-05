@@ -40,13 +40,8 @@ export class RecoverComponent {
     this.mensajeOk = null;
     this.loadingService.show();
 
-    const email = this.form.get('email')?.value;
-
-    if (!email) { // ⚠️ chequeo extra para TS
-      this.mensajeError = 'El correo es obligatorio';
-      this.loadingService.hide();
-      return;
-    }
+    // const email = this.form.get('email')?.value;
+    const email = this.form.value.email!;
 
     this.usersService.recoverByEmail(email).subscribe({
       next: (password) => {

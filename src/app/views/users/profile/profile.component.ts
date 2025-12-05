@@ -95,12 +95,12 @@ export class ProfileComponent {
       return;
     }
 
-    const { fullName, email } = this.form.value;
-    if (!fullName || !email) {
-      this.mensajeError = 'Nombre, email y contraseña son obligatorios';
-      this.loadingService.hide();
-      return;
-    }
+    // const { fullName, email } = this.form.value;
+    // if (!fullName || !email) {
+    //   this.mensajeError = 'Nombre, email y contraseña son obligatorios';
+    //   this.loadingService.hide();
+    //   return;
+    // }
 
     this.cargando = true;
 
